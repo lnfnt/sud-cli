@@ -1,0 +1,37 @@
+{
+  "cases": [
+    {
+      "case_id": "SYNTH-CASE-0001",
+      "case_number": "CASE-SYNTH-001",
+      "court": "Synthetic District Court of Exampleville",
+      "parties": {
+        "plaintiff": "Example Plaintiff LLC",
+        "defendant": "Example Defendant Inc."
+      },
+      "source_name": "local-synthetic-json",
+      "source_record_id": "SOURCE-CASE-0001",
+      "fetched_at": "2026-01-01T10:00:00+00:00",
+      "source_url": "file:///fixtures/synthetic/court_cases.json",
+      "events": [
+        {
+          "event_id": "SYNTH-EVENT-0001",
+          "event_date": "2026-01-10",
+          "event_type": "hearing",
+          "doc_text": "Synthetic motion hearing on discovery.",
+          "source_name": "local-synthetic-json",
+          "source_record_id": "SOURCE-EVENT-0001",
+          "fetched_at": "2026-01-10T12:00:00+00:00"
+        },
+        {
+          "event_id": "SYNTH-EVENT-0002",
+          "event_date": "2026-01-25",
+          "event_type": "judgment",
+          "doc_text": "Synthetic judgment on the widget dispute.",
+          "source_name": "local-synthetic-json",
+          "source_record_id": "SOURCE-EVENT-0002",
+          "fetched_at": "2026-01-25T14:00:00+00:00"
+        }
+      ]
+    }
+  ]
+}

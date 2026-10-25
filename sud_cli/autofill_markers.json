@@ -1,0 +1,56 @@
+{
+  "version": "1.1.0",
+  "source_note": "Словарь детерминированных текстовых маркеров актов (W6a S-23). deadline_keys — только существующие ключи legal_rules.json:deadline_matrix. Тексты норм здесь не хранятся и не дописываются (правило «тексты только из реестра»). v1.1.0: cure-строка as_cure_left_without_movement сериализована из VERIFIED внешняя проверка 2026-10-24 (duration=null — точка без даты, needs_confirm).",
+  "markers": [
+    {
+      "name": "left_without_movement",
+      "patterns": [
+        "оставлено без движения",
+        "оставлена без движения"
+      ],
+      "deadline_keys": [
+        "as_cure_left_without_movement"
+      ],
+      "cure": true
+    },
+    {
+      "name": "cure_period_set",
+      "patterns": [
+        "срок для устранения"
+      ],
+      "deadline_keys": [
+        "as_cure_left_without_movement"
+      ],
+      "cure": true
+    },
+    {
+      "name": "final_form_date",
+      "patterns": [
+        "изготовлено в окончательной форме",
+        "в окончательной форме"
+      ],
+      "deadline_keys": [
+        "as_appeal_decision",
+        "soyu_appeal_decision",
+        "kas_appeal_decision"
+      ],
+      "cure": false
+    },
+    {
+      "name": "act_received",
+      "patterns": [
+        "получено",
+        "получена",
+        "получен",
+        "вручена",
+        "вручено"
+      ],
+      "deadline_keys": [
+        "as_court_order_cancel",
+        "soyu_court_order_cancel",
+        "kas_court_order_cancel"
+      ],
+      "cure": false
+    }
+  ]
+}

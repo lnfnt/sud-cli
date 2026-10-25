@@ -1,0 +1,28 @@
+{
+  "records": [
+    {
+      "record_id": "SYNTH-COURT-0001",
+      "case_number": "CASE-SYNTH-001",
+      "court": "Synthetic District Court of Exampleville",
+      "parties": {
+        "plaintiff": "Example Plaintiff LLC",
+        "defendant": "Example Defendant Inc."
+      },
+      "event_date": "2026-01-15",
+      "event_type": "hearing",
+      "doc_text": "Synthetic motion to compel discovery in a widget contract dispute."
+    },
+    {
+      "record_id": "SYNTH-COURT-0002",
+      "case_number": "CASE-SYNTH-002",
+      "court": "Synthetic Appeals Court of Exampleville",
+      "parties": {
+        "plaintiff": "Alpha Synthetic",
+        "defendant": "Beta Synthetic"
+      },
+      "event_date": "2026-02-20",
+      "event_type": "judgment",
+      "doc_text": "Synthetic appellate judgment affirming the lower court decision."
+    }
+  ]
+}

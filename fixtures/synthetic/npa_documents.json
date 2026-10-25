@@ -1,0 +1,18 @@
+{
+  "documents": [
+    {
+      "doc_id": "SYNTH-NPA-0001",
+      "edition": "v1",
+      "title": "Synthetic Rules on Widget Standards",
+      "doc_date": "2026-03-01",
+      "body": "Original synthetic text establishing widget standards."
+    },
+    {
+      "doc_id": "SYNTH-NPA-0001",
+      "edition": "v2",
+      "title": "Synthetic Rules on Widget Standards (Amended)",
+      "doc_date": "2026-07-01",
+      "body": "Amended synthetic text establishing revised widget standards with additional clauses."
+    }
+  ]
+}
