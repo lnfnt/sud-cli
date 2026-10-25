@@ -1,0 +1,10 @@
+{
+  "source": "synthetic-kad",
+  "case_number": "A40-SYNTH-9999",
+  "court": "Synthetic Arbitration Court",
+  "judge": null,
+  "status": "В ПРОИЗВОДСТВЕ",
+  "participants": "should-be-object",
+  "events_timeline": [],
+  "updated_at": "2026-09-06T00:00:00Z"
+}

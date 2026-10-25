@@ -1,0 +1,1058 @@
+{
+  "version": "1.5.0",
+  "spec_version": "1.1.0",
+  "legal_status": "VERIFIED_BY_LEGAL_REVIEW_20261008_WITH_ADDENDUM_1.1.0",
+  "tariff_version": "259-FZ-2024-09-09-REV2",
+  "tariff_basis": {
+    "federal_law": "Федеральный закон от 08.08.2024 № 259-ФЗ",
+    "effective_from": "2024-09-09",
+    "verified_against": "pravo.gov.ru (publication.pravo.gov.ru), документ 259-ФЗ от 08.08.2024; audit colleague-legal 2026-10-22 (F1, F2, F3, F10)"
+  },
+  "production_calendar": {
+    "status": "ACTIVE_WITH_WARNING",
+    "source": "holidays_rf.json",
+    "as_of": "2026-10-08",
+    "shift_enabled": true,
+    "shift_scope": "weekends + ст. 112 ТК РФ + ч.2 ст.112 автопереносы + переносы Правительства РФ",
+    "government_transfers_encoded": true,
+    "government_transfers_encoded_through": 2027,
+    "verified_decrees": {
+      "2026": "Постановление Правительства РФ от 24.09.2025 № 1466 «О переносе выходных дней в 2026 году» (publication.pravo.gov.ru N 0001202509240023)",
+      "2027": "Постановление Правительства РФ от 17.09.2026 № 1187 «О переносе выходных дней в 2027 году» (publication.pravo.gov.ru, скан официального портала)"
+    },
+    "note": "Б2 снят аддендумом 1.1.0: базовые выходные (сб/вс), 14 нерабочих праздничных дней ст. 112 ТК РФ и автопереносы ч.2 ст.112 зашиты. Переносы Правительства РФ зашиты за 2026 год (постановление № 1466 от 24.09.2025) и за 2027 год (постановление № 1187 от 17.09.2026), оба подтверждены сканом официального портала и сверены помесячно с опубликованным календарём. CALENDAR_WARNING посегодичный: для закодированных годов выводится подтверждение источника, для остальных — полное предупреждение. Региональные праздники не учитываются."
+  },
+  "spec_open_questions": {
+    "B1_day1_basis": "RESOLVED by addendum 1.1.0 п.Б1 (ч.3+ч.4 ст.113 АПК РФ): отсчёт с следующего календарного дня, нерабочие дни не инкрементируют счётчик",
+    "B2_calendar": "RESOLVED by addendum 1.1.0 п.Б2 + постановление № 1466 от 24.09.2025: календарь зашит по 2026 год включительно (выходные + ст.112 + автопереносы ч.2 + переносы Правительства). Для годов без подтверждённого постановления — CALENDAR_WARNING",
+    "B3_matrix_gaps": "RESOLVED by addendum 1.1.0 п.Б3: добавлены отмена судебного приказа (АПК/ГПК/КАС), кассация на приказ (АПК/ГПК), КАС апелляция и кассация, апелляция на определения (АПК/ГПК)",
+    "B4_kas_tariff": "RESOLVED by addendum 1.1.0 п.Б4: ст. 333.19 НК РФ в полном объёме применяется к делам КАС РФ",
+    "B5_monthly_base": "RESOLVED by colleague-legal 2026-10-08, заключение LEGAL-OPINION-B5-MONTH-DEADLINES.md (ч.2 ст.114 АПК РФ, ч.1 ст.108 ГПК РФ, ч.1 ст.92 КАС РФ): срок, исчисляемый месяцами, истекает в соответствующее число последнего месяца. Соответствующее число — это число даты события (Day 0), а не число следующего дня. Правило «течение начинается на следующий день» исключает лишь сам день события из подсчёта и не сдвигает число окончания. Переключатель month_calculation_base = event_date"
+  },
+  "month_calculation_base": "event_date",
+  "monthly_base_assumption": {
+    "choice": "event_date",
+    "legal_basis": "ч.2 ст.114 АПК РФ, ч.1 ст.108 ГПК РФ, ч.1 ст.92 КАС РФ",
+    "reason": "Месячный срок истекает в соответствующее число последнего месяца. Соответствующее число — число даты события (Day 0). Правило «течение начинается на следующий день» (ч.4 ст.113 АПК РФ) исключает день события из подсчёта, но не сдвигает число окончания срока.",
+    "special_rule": "Если в целевом месяце нет соответствующего числа (31 января → февраль), срок истекает в последний день этого месяца.",
+    "working_day_rule": "Правило нерабочего дня (ч.4 ст.114 АПК РФ) применяется ПОСЛЕ определения даты соответствующего числа: нерабочая дата переносится на первый следующий рабочий день.",
+    "resolved_by": "colleague-legal, заключение LEGAL-OPINION-B5-MONTH-DEADLINES.md, 2026-10-08",
+    "status": "RESOLVED"
+  },
+  "applicant_types": [
+    "individual",
+    "entity"
+  ],
+  "unsupported_case_classes": [
+    "bankruptcy",
+    "criminal",
+    "administrative_offence"
+  ],
+  "jisdictions": {
+    "arbitration": {
+      "code": "AS",
+      "label": "Арбитражные суды РФ",
+      "process_code": "АПК РФ",
+      "tariff_article": "333.21 НК РФ",
+      "fee": {
+        "property_claim": {
+          "type": "progressive",
+          "floor": 10000,
+          "ceiling": 10000000,
+          "brackets": [
+            {
+              "up_to": 100000,
+              "base": 10000,
+              "rate": 0,
+              "rate_on": "threshold"
+            },
+            {
+              "up_to": 1000000,
+              "base": 10000,
+              "rate": 0.05,
+              "rate_on": "over"
+            },
+            {
+              "up_to": 10000000,
+              "base": 55000,
+              "rate": 0.03,
+              "rate_on": "over"
+            },
+            {
+              "up_to": 50000000,
+              "base": 325000,
+              "rate": 0.01,
+              "rate_on": "over"
+            },
+            {
+              "up_to": null,
+              "base": 725000,
+              "rate": 0.005,
+              "rate_on": "over"
+            }
+          ]
+        },
+        "court_order": {
+          "type": "share",
+          "share_of": "property_claim",
+          "factor": 0.5,
+          "floor": 8000
+        },
+        "non_property_claim": {
+          "type": "fixed_by_applicant",
+          "individual": 15000,
+          "entity": 50000
+        },
+        "appeal": {
+          "type": "fixed_by_applicant",
+          "individual": 10000,
+          "entity": 30000
+        },
+        "cassation_first": {
+          "type": "fixed_by_applicant",
+          "individual": 20000,
+          "entity": 50000
+        },
+        "cassation_supreme": {
+          "type": "fixed_by_applicant",
+          "individual": 30000,
+          "entity": 80000
+        },
+        "bankruptcy_petition": {
+          "type": "fixed_by_applicant",
+          "individual": 10000,
+          "entity": 100000
+        },
+        "bankruptcy_creditor_claim": {
+          "type": "share",
+          "share_of": "property_claim",
+          "factor": 0.5,
+          "floor": 0
+        }
+      },
+      "deadline_day_mode": "working_days"
+    },
+    "general_jurisdiction": {
+      "code": "SOYU",
+      "label": "Суды общей юрисдикции",
+      "process_code": "ГПК РФ / КАС РФ",
+      "tariff_article": "333.19 НК РФ",
+      "fee": {
+        "property_claim": {
+          "type": "progressive",
+          "floor": 4000,
+          "ceiling": 900000,
+          "brackets": [
+            {
+              "up_to": 100000,
+              "base": 4000,
+              "rate": 0,
+              "rate_on": "threshold"
+            },
+            {
+              "up_to": 300000,
+              "base": 4000,
+              "rate": 0.03,
+              "rate_on": "over"
+            },
+            {
+              "up_to": 500000,
+              "base": 10000,
+              "rate": 0.025,
+              "rate_on": "over"
+            },
+            {
+              "up_to": 1000000,
+              "base": 15000,
+              "rate": 0.02,
+              "rate_on": "over"
+            },
+            {
+              "up_to": 3000000,
+              "base": 25000,
+              "rate": 0.01,
+              "rate_on": "over"
+            },
+            {
+              "up_to": 8000000,
+              "base": 45000,
+              "rate": 0.007,
+              "rate_on": "over"
+            },
+            {
+              "up_to": 24000000,
+              "base": 80000,
+              "rate": 0.0035,
+              "rate_on": "over"
+            },
+            {
+              "up_to": 50000000,
+              "base": 136000,
+              "rate": 0.003,
+              "rate_on": "over"
+            },
+            {
+              "up_to": 100000000,
+              "base": 214000,
+              "rate": 0.002,
+              "rate_on": "over"
+            },
+            {
+              "up_to": null,
+              "base": 314000,
+              "rate": 0.0015,
+              "rate_on": "over"
+            }
+          ]
+        },
+        "court_order": {
+          "type": "share",
+          "share_of": "property_claim",
+          "factor": 0.5,
+          "floor": 0
+        },
+        "non_property_claim": {
+          "type": "fixed_by_applicant",
+          "individual": 3000,
+          "entity": 20000
+        },
+        "appeal": {
+          "type": "fixed_by_applicant",
+          "individual": 3000,
+          "entity": 15000
+        },
+        "cassation_first": {
+          "type": "fixed_by_applicant",
+          "individual": 5000,
+          "entity": 20000
+        },
+        "cassation_supreme": {
+          "type": "fixed_by_applicant",
+          "individual": 7000,
+          "entity": 25000
+        }
+      },
+      "deadline_day_mode": "calendar_days"
+    },
+    "kas": {
+      "code": "KAS",
+      "label": "Суды общей юрисдикции, административное судопроизводство (КАС РФ)",
+      "process_code": "КАС РФ",
+      "tariff_article": "333.19 НК РФ (в полном объёме по п.Б4 аддендума 1.1.0)",
+      "fee": {
+        "property_claim": {
+          "type": "progressive",
+          "floor": 4000,
+          "ceiling": 900000,
+          "brackets": [
+            {
+              "up_to": 100000,
+              "base": 4000,
+              "rate": 0,
+              "rate_on": "threshold"
+            },
+            {
+              "up_to": 300000,
+              "base": 4000,
+              "rate": 0.03,
+              "rate_on": "over"
+            },
+            {
+              "up_to": 500000,
+              "base": 10000,
+              "rate": 0.025,
+              "rate_on": "over"
+            },
+            {
+              "up_to": 1000000,
+              "base": 15000,
+              "rate": 0.02,
+              "rate_on": "over"
+            },
+            {
+              "up_to": 3000000,
+              "base": 25000,
+              "rate": 0.01,
+              "rate_on": "over"
+            },
+            {
+              "up_to": 8000000,
+              "base": 45000,
+              "rate": 0.007,
+              "rate_on": "over"
+            },
+            {
+              "up_to": 24000000,
+              "base": 80000,
+              "rate": 0.0035,
+              "rate_on": "over"
+            },
+            {
+              "up_to": 50000000,
+              "base": 136000,
+              "rate": 0.003,
+              "rate_on": "over"
+            },
+            {
+              "up_to": 100000000,
+              "base": 214000,
+              "rate": 0.002,
+              "rate_on": "over"
+            },
+            {
+              "up_to": null,
+              "base": 314000,
+              "rate": 0.0015,
+              "rate_on": "over"
+            }
+          ]
+        },
+        "court_order": {
+          "type": "share",
+          "share_of": "property_claim",
+          "factor": 0.5,
+          "floor": 0
+        },
+        "non_property_claim": {
+          "type": "fixed_by_applicant",
+          "individual": 3000,
+          "entity": 20000
+        },
+        "appeal": {
+          "type": "fixed_by_applicant",
+          "individual": 3000,
+          "entity": 15000
+        },
+        "cassation_first": {
+          "type": "fixed_by_applicant",
+          "individual": 5000,
+          "entity": 20000
+        },
+        "cassation_supreme": {
+          "type": "fixed_by_applicant",
+          "individual": 7000,
+          "entity": 25000
+        }
+      },
+      "deadline_day_mode": "calendar_days"
+    }
+  },
+  "deadline_matrix": {
+    "as_appeal_decision": {
+      "jurisdiction": "arbitration",
+      "legal_basis": "ч. 1 ст. 259 АПК РФ",
+      "duration": {
+        "value": 1,
+        "unit": "months"
+      },
+      "trigger": "decision_full_text_date",
+      "spec_confirmed": true
+    },
+    "as_appeal_simplified": {
+      "jurisdiction": "arbitration",
+      "legal_basis": "ч. 4 ст. 229 АПК РФ",
+      "duration": {
+        "value": 15,
+        "unit": "working_days"
+      },
+      "trigger": "decision_accepted_date",
+      "spec_confirmed": true
+    },
+    "as_cassation_district": {
+      "jurisdiction": "arbitration",
+      "legal_basis": "ч. 1 ст. 276 АПК РФ",
+      "duration": {
+        "value": 2,
+        "unit": "months"
+      },
+      "trigger": "decision_enforcement_date",
+      "spec_confirmed": true
+    },
+    "soyu_appeal_decision": {
+      "jurisdiction": "general_jurisdiction",
+      "legal_basis": "ст. 321 ГПК РФ",
+      "duration": {
+        "value": 1,
+        "unit": "months"
+      },
+      "trigger": "decision_final_date",
+      "spec_confirmed": true
+    },
+    "soyu_cassation": {
+      "jurisdiction": "general_jurisdiction",
+      "legal_basis": "ч. 1 ст. 376.1 ГПК РФ",
+      "duration": {
+        "value": 3,
+        "unit": "months"
+      },
+      "trigger": "decision_enforcement_date",
+      "spec_confirmed": true
+    },
+    "as_appeal_ruling": {
+      "jurisdiction": "arbitration",
+      "legal_basis": "ч. 3 ст. 188 АПК РФ",
+      "duration": {
+        "value": 15,
+        "unit": "working_days"
+      },
+      "trigger": "ruling_date",
+      "spec_confirmed": true,
+      "spec_source": "addendum 1.1.0 п.Б3 п.3 — неопределенность снята, 15 рабочих дней"
+    },
+    "soyu_appeal_ruling": {
+      "jurisdiction": "general_jurisdiction",
+      "legal_basis": "ст. 332 ГПК РФ",
+      "duration": {
+        "value": 15,
+        "unit": "calendar_days"
+      },
+      "trigger": "ruling_date",
+      "spec_confirmed": true,
+      "spec_source": "addendum 1.1.0 п.Б3 п.3"
+    },
+    "as_court_order_cancel": {
+      "jurisdiction": "arbitration",
+      "legal_basis": "ч. 4 ст. 229.5 АПК РФ",
+      "duration": {
+        "value": 10,
+        "unit": "working_days"
+      },
+      "trigger": "order_received_date",
+      "spec_confirmed": true,
+      "spec_source": "addendum 1.1.0 п.Б3 п.1"
+    },
+    "soyu_court_order_cancel": {
+      "jurisdiction": "general_jurisdiction",
+      "legal_basis": "ст. 128 ГПК РФ",
+      "duration": {
+        "value": 10,
+        "unit": "calendar_days"
+      },
+      "trigger": "order_received_date",
+      "spec_confirmed": true,
+      "spec_source": "addendum 1.1.0 п.Б3 п.1"
+    },
+    "kas_court_order_cancel": {
+      "jurisdiction": "kas",
+      "legal_basis": "ч. 3 ст. 123.5 КАС РФ",
+      "duration": {
+        "value": 20,
+        "unit": "calendar_days"
+      },
+      "trigger": "order_served_date",
+      "spec_confirmed": true,
+      "spec_source": "addendum 1.1.0 п.Б3 п.1"
+    },
+    "as_court_order_cassation": {
+      "jurisdiction": "arbitration",
+      "legal_basis": "ч. 11 ст. 229.5 АПК РФ",
+      "duration": {
+        "value": 2,
+        "unit": "months"
+      },
+      "trigger": "order_enforcement_date",
+      "spec_confirmed": true,
+      "spec_source": "addendum 1.1.0 п.Б3 п.1"
+    },
+    "soyu_court_order_cassation": {
+      "jurisdiction": "general_jurisdiction",
+      "legal_basis": "ч. 1 ст. 376.1 ГПК РФ",
+      "duration": {
+        "value": 3,
+        "unit": "months"
+      },
+      "trigger": "order_enforcement_date",
+      "spec_confirmed": true,
+      "spec_source": "addendum 1.1.0 п.Б3 п.1"
+    },
+    "kas_appeal_decision": {
+      "jurisdiction": "kas",
+      "legal_basis": "ч. 1 ст. 298 КАС РФ",
+      "duration": {
+        "value": 1,
+        "unit": "months"
+      },
+      "trigger": "decision_final_date",
+      "spec_confirmed": true,
+      "spec_source": "addendum 1.1.0 п.Б3 п.2"
+    },
+    "kas_cassation": {
+      "jurisdiction": "kas",
+      "legal_basis": "ч. 2 ст. 318 КАС РФ",
+      "duration": {
+        "value": 6,
+        "unit": "months"
+      },
+      "trigger": "decision_enforcement_date",
+      "spec_confirmed": true,
+      "spec_source": "addendum 1.1.0 п.Б3 п.2"
+    },
+    "shortened_special_deadline": {
+      "jurisdiction": "arbitration",
+      "legal_basis": "специальные сокращённые сроки (напр. по обеспечению иска)",
+      "duration": null,
+      "trigger": "varies",
+      "spec_confirmed": true,
+      "always_manual_review": true,
+      "spec_source": "addendum 1.1.0 п.Б3 п.3 — всегда MANUAL_LEGAL_REVIEW_REQUIRED"
+    },
+    "as_cure_left_without_movement": {
+      "jurisdiction": "arbitration",
+      "legal_basis": "ч. 2 ст. 128, ч. 2 ст. 112 АПК РФ",
+      "duration": null,
+      "trigger": "ruling_date",
+      "spec_confirmed": true,
+      "always_manual_review": true,
+      "spec_source": "ст. 112 ч. 2, ст. 128 ч. 2 АПК РФ — срок назначает суд в определении; duration=null, статус always_manual_review/needs_confirm"
+    }
+  },
+  "rounding": {
+    "article": "п. 6 ст. 52 НК РФ",
+    "mode": "half_up_to_ruble",
+    "note": "сумма менее 50 копеек отбрасывается; 50 копеек и более округляется вверх"
+  },
+  "exemptions": {
+    "applied_in_mvp": false,
+    "mandatory_note": "Расчёт выполнен по общим правилам. Освобождение от уплаты пошлины (инвалиды I и II групп, ветераны, потребители до 1 млн руб. по ст. 333.36, 333.37 НК РФ) учитывается индивидуально."
+  },
+  "mandatory_disclaimer": "[Справочный расчет sud-cli | Версия правил: 1.1.0 (ФЗ-259 от 08.08.2024) | Дата: {calc_date}]\nВнимание: Расчет является справочным и основан на общих нормах НК РФ, АПК РФ, ГПК РФ и КАС РФ.\nОкончательный размер пошлины и процессуальный срок определяются судом с учетом конкретных обстоятельств дела.",
+  "boundary_note": "Срок может быть восстановлен судом при наличии уважительных причин (ст. 117 АПК РФ / ст. 112 ГПК РФ)",
+  "clean_room": {
+    "accepted_inputs": [
+      "abstract numeric and categorical parameters only"
+    ],
+    "forbidden_persistence": [
+      "party names",
+      "case facts",
+      "passport numbers"
+    ],
+    "audit_fields": [
+      "timestamp",
+      "command",
+      "calculated_amount",
+      "deadline_date",
+      "status_code"
+    ]
+  },
+  "fee_exemptions_and_refunds": {
+    "exemptions_333_35": {
+      "statute": "ст. 333.35 НК РФ",
+      "title": "Льготы для отдельных категорий физических лиц и организаций",
+      "categories": [
+        {
+          "code": "state_organs",
+          "basis": "пп. 1 п. 1 ст. 333.35 НК РФ",
+          "description": "Органы государственной власти, местного самоуправления, выступающие по делам в защиту государственных/общественных интересов",
+          "exempt_level": "full"
+        },
+        {
+          "code": "heroes_veterans_rf",
+          "basis": "пп. 11, 12, 14 п. 1 ст. 333.35 НК РФ",
+          "description": "Герои РФ, Герои Советского Союза, полные кавалеры ордена Славы, участники ВОВ, ветераны боевых действий",
+          "exempt_level": "full"
+        }
+      ]
+    },
+    "exemptions_333_36": {
+      "statute": "ст. 333.36 НК РФ",
+      "title": "Льготы при обращении в суды общей юрисдикции и к мировым судьям",
+      "categories": [
+        {
+          "code": "labor_plaintiff",
+          "basis": "пп. 1 п. 1 ст. 333.36 НК РФ",
+          "description": "Истцы по искам о взыскании заработной платы (оплаты труда) и иным требованиям трудового права",
+          "exempt_level": "full"
+        },
+        {
+          "code": "alimony_plaintiff",
+          "basis": "пп. 2 п. 1 ст. 333.36 НК РФ",
+          "description": "Истцы по искам о взыскании алиментов",
+          "exempt_level": "full"
+        },
+        {
+          "code": "harm_compensation_health",
+          "basis": "пп. 3 п. 1 ст. 333.36 НК РФ",
+          "description": "Истцы по искам о возмещении вреда жизни/здоровью и смертью кормильца",
+          "exempt_level": "full"
+        },
+        {
+          "code": "criminal_crime_harm",
+          "basis": "пп. 4 п. 1 ст. 333.36 НК РФ",
+          "description": "Истцы по искам о возмещении вреда, причиненного преступлением",
+          "exempt_level": "full"
+        },
+        {
+          "code": "disabled_group_1_2",
+          "basis": "пп. 2 п. 2 ст. 333.36 НК РФ",
+          "description": "Инвалиды I и II группы (освобождение до 1 000 000 руб.; свыше 1 000 000 руб. — уплата за вычетом суммы пошлины на 1 000 000 руб.)",
+          "exempt_level": "threshold_1m",
+          "threshold_rub": 1000000
+        },
+        {
+          "code": "consumer_protection",
+          "basis": "пп. 4 п. 2 ст. 333.36 НК РФ, п. 3 ст. 17 ЗоЗПП",
+          "description": "Истцы по защите прав потребителей (освобождение до 1 000 000 руб.; свыше 1 000 000 руб. — уплата за вычетом суммы пошлины на 1 000 000 руб.)",
+          "exempt_level": "threshold_1m",
+          "threshold_rub": 1000000
+        },
+        {
+          "code": "veterans_claims",
+          "basis": "пп. 3 п. 2 ст. 333.36 НК РФ",
+          "description": "Ветераны боевых действий и военной службы при защите своих прав (до 1 000 000 руб.; свыше — за вычетом)",
+          "exempt_level": "threshold_1m",
+          "threshold_rub": 1000000
+        },
+        {
+          "code": "pensioners_claims",
+          "basis": "пп. 5 п. 2 ст. 333.36 НК РФ",
+          "description": "Пенсионеры по имущественным искам к пенсионным органам (до 1 000 000 руб.)",
+          "exempt_level": "threshold_1m",
+          "threshold_rub": 1000000
+        }
+      ]
+    },
+    "exemptions_333_37": {
+      "statute": "ст. 333.37 НК РФ",
+      "title": "Льготы при обращении в арбитражные суды",
+      "categories": [
+        {
+          "code": "arbitration_state_organs",
+          "basis": "пп. 1 п. 1 ст. 333.37 НК РФ",
+          "description": "Прокуроры, государственные органы, органы МСУ в защиту публичных интересов",
+          "exempt_level": "full"
+        },
+        {
+          "code": "arbitration_disabled_1_2",
+          "basis": "пп. 2 п. 2 ст. 333.37 НК РФ",
+          "description": "Инвалиды I и II группы (до 1 000 000 руб.; свыше — за вычетом пошлины на 1 000 000 руб.)",
+          "exempt_level": "threshold_1m",
+          "threshold_rub": 1000000
+        }
+      ]
+    },
+    "refund_333_40": {
+      "statute": "ст. 333.40 НК РФ",
+      "title": "Основания возврата государственной пошлины",
+      "grounds": [
+        {
+          "code": "overpaid",
+          "basis": "пп. 1 п. 1 ст. 333.40 НК РФ",
+          "description": "Излишняя уплата государственной пошлины",
+          "refund_share": 1.0,
+          "condition": "возврат в размере излишне уплаченной суммы"
+        },
+        {
+          "code": "returned_or_refused_claim",
+          "basis": "пп. 2 п. 1 ст. 333.40 НК РФ",
+          "description": "Возвращение заявления, жалобы или отказ в их принятии",
+          "refund_share": 1.0,
+          "condition": "полный возврат"
+        },
+        {
+          "code": "dismissed_no_consideration",
+          "basis": "пп. 3 п. 1 ст. 333.40 НК РФ",
+          "description": "Прекращение производства по делу или оставление заявления без рассмотрения",
+          "refund_share": 1.0,
+          "condition": "кроме неявки истца (ст. 222 ГПК/ст. 148 АПК) и передачи спора в третейский суд"
+        },
+        {
+          "code": "settlement_first_instance",
+          "basis": "абз. 2 пп. 3 п. 1 ст. 333.40 НК РФ",
+          "description": "Мировое соглашение, отказ от иска, признание иска в суде первой инстанции",
+          "refund_share": 0.7,
+          "condition": "возврат 70% уплаченной пошлины (не применяется при признании иска ответчиком вследствие добровольного удовлетворения требований после подачи иска)"
+        },
+        {
+          "code": "settlement_appeal",
+          "basis": "абз. 3 пп. 3 п. 1 ст. 333.40 НК РФ",
+          "description": "Мировое соглашение, отказ от иска, признание иска в суде апелляционной инстанции",
+          "refund_share": 0.5,
+          "condition": "возврат 50% уплаченной пошлины"
+        },
+        {
+          "code": "settlement_cassation_supervision",
+          "basis": "абз. 4 пп. 3 п. 1 ст. 333.40 НК РФ",
+          "description": "Мировое соглашение, отказ от иска, признание иска в суде кассационной или надзорной инстанции",
+          "refund_share": 0.3,
+          "condition": "возврат 30% уплаченной пошлины"
+        },
+        {
+          "code": "refusal_action_before_filing",
+          "basis": "пп. 4 п. 1 ст. 333.40 НК РФ",
+          "description": "Отказ плательщика от совершения юридически значимого действия до обращения в суд",
+          "refund_share": 1.0,
+          "condition": "полный возврат при условии отсутствия обращения в суд"
+        }
+      ],
+      "limitation_years": 3,
+      "limitation_basis": "п. 3 ст. 333.40 НК РФ (срок подачи заявления — 3 года со дня уплаты)"
+    },
+    "interest_and_indexation": {
+      "interest_395": {
+        "statute": "ст. 395 ГК РФ",
+        "title": "Проценты за пользование чужими денежными средствами",
+        "rate_source": "Ключевая ставка Банка России",
+        "calendar_basis": "365/366 дней (фактическое количество дней в году по Постановлению Пленума ВС РФ № 7)",
+        "repayment_order": "ст. 319 ГК РФ (издержки -> проценты -> основной долг)"
+      },
+      "indexation_procedural": {
+        "apk": {
+          "statute": "ст. 183 АПК РФ",
+          "title": "Индексация присужденных денежных сумм (арбитраж)",
+          "index": "Индекс потребительских цен (ИПЦ) Росстата",
+          "period_start": "день вынесения решения суда / установленный срок выплаты",
+          "period_end": "день фактического исполнения"
+        },
+        "gpk": {
+          "statute": "ст. 208 ГПК РФ",
+          "title": "Индексация присужденных денежных сумм (СОЮ)",
+          "index": "Индекс потребительских цен (ИПЦ) Росстата",
+          "period_start": "день вынесения решения суда",
+          "period_end": "день фактического исполнения"
+        },
+        "kas": {
+          "statute": "ст. 189.1 КАС РФ",
+          "title": "Индексация присужденных денежных сумм (КАС)",
+          "index": "Индекс потребительских цен (ИПЦ) Росстата",
+          "period_start": "день вынесения решения суда",
+          "period_end": "день фактического исполнения"
+        }
+      },
+      "contractual_penalty_330": {
+        "statute": "ст. 330, 333 ГК РФ",
+        "title": "Договорная неустойка (пени, штраф)",
+        "rule": "Определяется договором; снижение по ст. 333 ГК РФ в коммерческих спорах — строго по мотивированному заявлению ответчика"
+      }
+    }
+  },
+  "w4_norms_source": "the compliance file (colleague-legal VERIFIED, акт the wave+W4, 2026-10-24)",
+  "historical_court_tariffs": {
+    "disclaimer": "Исторические шкалы ст. 333.19 и 333.21 НК РФ для расчета цены иска и пошлин по дате подачи заявления.",
+    "editions": [
+      {
+        "edition_id": "nk_rf_221_fz_2015",
+        "title": "Редакция Федерального закона от 21.07.2014 № 221-ФЗ",
+        "effective_from": "2015-01-01",
+        "effective_to": "2024-09-08",
+        "basis": "Федеральный закон от 21.07.2014 № 221-ФЗ",
+        "jurisdictions": {
+          "arbitration": {
+            "statute": "ст. 333.21 НК РФ",
+            "fee": {
+              "property_claim": {
+                "type": "progressive",
+                "floor": 2000,
+                "ceiling": 200000,
+                "brackets": [
+                  {
+                    "up_to": 100000,
+                    "base": 0,
+                    "rate": 0.04,
+                    "rate_on": "full",
+                    "min_fee": 2000
+                  },
+                  {
+                    "up_to": 200000,
+                    "base": 4000,
+                    "rate": 0.03,
+                    "rate_on": "over"
+                  },
+                  {
+                    "up_to": 1000000,
+                    "base": 7000,
+                    "rate": 0.02,
+                    "rate_on": "over"
+                  },
+                  {
+                    "up_to": 2000000,
+                    "base": 23000,
+                    "rate": 0.01,
+                    "rate_on": "over"
+                  },
+                  {
+                    "up_to": null,
+                    "base": 33000,
+                    "rate": 0.005,
+                    "rate_on": "over",
+                    "max_fee": 200000
+                  }
+                ]
+              },
+              "court_order": {
+                "type": "share",
+                "share_of": "property_claim",
+                "factor": 0.5,
+                "floor": 0
+              },
+              "non_property_claim": {
+                "type": "fixed_by_applicant",
+                "individual": 300,
+                "entity": 6000
+              },
+              "appeal": {
+                "type": "fixed",
+                "amount": 3000,
+                "note": "50% размера госпошлины при подаче искового заявления неимущественного характера"
+              },
+              "cassation_first": {
+                "type": "fixed",
+                "amount": 3000,
+                "note": "50% размера госпошлины при подаче искового заявления неимущественного характера"
+              },
+              "cassation_supreme": {
+                "type": "fixed",
+                "amount": 3000,
+                "note": "50% размера госпошлины при подаче искового заявления неимущественного характера"
+              },
+              "bankruptcy_petition": {
+                "type": "fixed_by_applicant",
+                "individual": 300,
+                "entity": 6000
+              }
+            }
+          },
+          "general_jurisdiction": {
+            "statute": "ст. 333.19 НК РФ",
+            "fee": {
+              "property_claim": {
+                "type": "progressive",
+                "floor": 400,
+                "ceiling": 60000,
+                "brackets": [
+                  {
+                    "up_to": 20000,
+                    "base": 0,
+                    "rate": 0.04,
+                    "rate_on": "full",
+                    "min_fee": 400
+                  },
+                  {
+                    "up_to": 100000,
+                    "base": 800,
+                    "rate": 0.03,
+                    "rate_on": "over"
+                  },
+                  {
+                    "up_to": 200000,
+                    "base": 3200,
+                    "rate": 0.02,
+                    "rate_on": "over"
+                  },
+                  {
+                    "up_to": 1000000,
+                    "base": 5200,
+                    "rate": 0.01,
+                    "rate_on": "over"
+                  },
+                  {
+                    "up_to": null,
+                    "base": 13200,
+                    "rate": 0.005,
+                    "rate_on": "over",
+                    "max_fee": 60000
+                  }
+                ]
+              },
+              "court_order": {
+                "type": "share",
+                "share_of": "property_claim",
+                "factor": 0.5,
+                "floor": 0
+              },
+              "non_property_claim": {
+                "type": "fixed_by_applicant",
+                "individual": 300,
+                "entity": 6000
+              },
+              "appeal": {
+                "type": "fixed_by_applicant",
+                "individual": 150,
+                "entity": 3000
+              },
+              "cassation_first": {
+                "type": "fixed_by_applicant",
+                "individual": 150,
+                "entity": 3000
+              },
+              "cassation_supreme": {
+                "type": "fixed_by_applicant",
+                "individual": 150,
+                "entity": 3000
+              }
+            }
+          }
+        }
+      },
+      {
+        "edition_id": "nk_rf_259_fz_2024",
+        "title": "Редакция Федерального закона от 08.08.2024 № 259-ФЗ",
+        "effective_from": "2024-09-09",
+        "effective_to": null,
+        "basis": "Федеральный закон от 08.08.2024 № 259-ФЗ",
+        "note": "Действующая редакция (сериализована в sud-cli legal_rules.json)"
+      }
+    ]
+  },
+  "w4d_norms_source": "the compliance file (colleague-legal VERIFIED)",
+  "pdn_policy": {
+    "legal_status": "VERIFIED_BY_LEGAL_REVIEW_20261024 (RE: W6a letter 001a16d5e7b4)",
+    "grounds": [
+      "пп. 2, 5 ч. 1 ст. 6 152-ФЗ (правосудие / исполнение договора юрпомощи)",
+      "ст. 8 63-ФЗ (адвокатская тайна)"
+    ],
+    "retention": "период производства по делу + 3 года на предъявление исполнительного листа (ст. 21 229-ФЗ); кэш/аудит — strict clean_room без прямых ПДн",
+    "subject_rights": [
+      "машиночитаемый экспорт дела",
+      "полное уничтожение данных дела (purge)"
+    ]
+  },
+  "w6b_norms_source": "письма colleague-legal 24.10: 001a16d5e7b4 (cure+ПДн, RE: W6a); сериализовано 1:1",
+  "limitation_audit_rules": {
+    "gk_rf_suspension_interruption": {
+      "article_202": {
+        "statute": "ст. 202 ГК РФ",
+        "title": "Приостановление течения срока исковой давности",
+        "grounds": [
+          {
+            "code": "force_majeure",
+            "basis": "пп. 1 п. 1 ст. 202 ГК РФ",
+            "rule": "Чрезвычайное и непредотвратимое при данных условиях обстоятельство (непреодолимая сила)",
+            "condition": "Обстоятельство возникло или продолжало существовать в последние 6 месяцев срока давности",
+            "effect": "suspension",
+            "post_suspension_extension_months": 6
+          },
+          {
+            "code": "military_action",
+            "basis": "пп. 2 п. 1 ст. 202 ГК РФ",
+            "rule": "Нахождение истца или ответчика в составе Вооруженных Сил РФ, переведенных на военное положение",
+            "condition": "Действовало в последние 6 месяцев срока давности",
+            "effect": "suspension",
+            "post_suspension_extension_months": 6
+          },
+          {
+            "code": "moratorium",
+            "basis": "пп. 3 п. 1 ст. 202 ГК РФ",
+            "rule": "Установленная Правительством РФ отсрочка исполнения обязательств (мораторий)",
+            "condition": "Действовал в последние 6 месяцев срока давности",
+            "effect": "suspension",
+            "post_suspension_extension_months": 6
+          },
+          {
+            "code": "statutory_act_suspension",
+            "basis": "пп. 4 п. 1 ст. 202 ГК РФ",
+            "rule": "Приостановление действия закона или иного правового акта, регулирующего соответствующее отношение",
+            "condition": "Действовало в последние 6 месяцев срока давности",
+            "effect": "suspension",
+            "post_suspension_extension_months": 6
+          },
+          {
+            "code": "pretrial_procedure",
+            "basis": "п. 3 ст. 202 ГК РФ",
+            "rule": "Соблюдение установленного законом или договором досудебного/претензионного порядка (включая медиацию)",
+            "condition": "Приостанавливается на срок проведения процедуры (законный 30 дней, либо договорной, либо 6 месяцев для медиации)",
+            "effect": "suspension",
+            "post_suspension_extension_months": 6
+          }
+        ],
+        "calculation_tail": {
+          "basis": "п. 4 ст. 202 ГК РФ",
+          "rule": "Со дня прекращения обстоятельства срок давности продолжается; если оставшаяся часть срока менее 6 месяцев — удлиняется до 6 месяцев (если сам срок был менее 6 месяцев — до срока давности)"
+        }
+      },
+      "article_203": {
+        "statute": "ст. 203 ГК РФ",
+        "title": "Перерыв течения срока исковой давности",
+        "trigger": "recognition_of_debt",
+        "rule": "Совершение обязанным лицом действий, свидетельствующих о признании долга",
+        "effect": "interruption",
+        "consequence": "После перерыва течение срока давности начинается заново; время, истекшее до перерыва, в новый срок не засчитывается",
+        "examples_pp_vs_29": [
+          "признание претензии",
+          "частичная уплата долга или процентов",
+          "просьба об отсрочке или рассрочке платежа",
+          "подписание акта сверки взаимных расчетов уполномоченным лицом"
+        ]
+      },
+      "article_204": {
+        "statute": "ст. 204 ГК РФ",
+        "title": "Течение срока исковой давности при защите права в судебном порядке",
+        "rules": [
+          {
+            "code": "judicial_claim_filed",
+            "basis": "п. 1 ст. 204 ГК РФ",
+            "rule": "Срок давности не течет со дня обращения в суд в установленном порядке за защитой нарушенного права на протяжении всего времени судебной защиты",
+            "effect": "does_not_run"
+          },
+          {
+            "code": "claim_left_without_consideration",
+            "basis": "п. 2 ст. 204 ГК РФ",
+            "rule": "Оставление иска без рассмотрения (если иск оставлен без рассмотрения судом, начавшееся до предъявления иска течение срока давности продолжается в общем порядке)",
+            "effect": "resumes",
+            "extension": "Если оставшаяся часть срока менее 6 месяцев — удлиняется до 6 месяцев (за исключением случаев, когда иск оставлен без рассмотрения по вине истца в силу ст. 222 ГПК / 148 АПК РФ)"
+          },
+          {
+            "code": "court_order_cancelled",
+            "basis": "п. 3 ст. 204 ГК РФ, п. 17 Постановления Пленума ВС РФ № 43",
+            "rule": "Отмена судебного приказа",
+            "effect": "resumes",
+            "extension": "Если оставшаяся часть срока менее 6 месяцев — удлиняется до 6 месяцев со дня вынесения определения об отмене судебного приказа"
+          }
+        ]
+      }
+    },
+    "bankruptcy_avoidance_rules_127_fz": {
+      "article_61_2_suspicious": {
+        "statute": "ст. 61.2 127-ФЗ",
+        "title": "Оспаривание подозрительных сделок должника",
+        "item_1_unequal_consideration": {
+          "basis": "п. 1 ст. 61.2 127-ФЗ",
+          "name": "Неравноценное встречное исполнение обязательств",
+          "suspect_period_years": 1,
+          "anchor_event": "принятие арбитражным судом заявления о признании должника банкротом",
+          "presumptions": [
+            "цена существенно в худшую для должника сторону отличается от цены аналогичных сделок"
+          ],
+          "fault_required": false
+        },
+        "item_2_harm_to_creditors": {
+          "basis": "п. 2 ст. 61.2 127-ФЗ",
+          "name": "Сделка, совершенная с целью причинения вреда имущественным правам кредиторов",
+          "suspect_period_years": 3,
+          "anchor_event": "принятие заявления о признании должника банкротом",
+          "required_elements": [
+            "причинение вреда имущественным правам кредиторов",
+            "цель причинения вреда",
+            "осведомленность другой стороны сделки об указанной цели должника к моменту совершения сделки"
+          ],
+          "presumption_of_knowledge": "Другая сторона знала о цели, если она признана заинтересованным лицом (ст. 19 127-ФЗ)"
+        }
+      },
+      "article_61_3_preference": {
+        "statute": "ст. 61.3 127-ФЗ",
+        "title": "Оспаривание сделок с предпочтением",
+        "item_1_preference_general": {
+          "basis": "п. 1-2 ст. 61.3 127-ФЗ",
+          "name": "Сделка с предпочтением отдельному кредитору",
+          "suspect_period_months": 1,
+          "anchor_event": "принятие заявления о признании должника банкротом",
+          "knowledge_required": false
+        },
+        "item_2_preference_with_knowledge": {
+          "basis": "п. 3 ст. 61.3 127-ФЗ",
+          "name": "Сделка с предпочтением при наличии недобросовестности/осведомленности",
+          "suspect_period_months": 6,
+          "anchor_event": "принятие заявления о признании должника банкротом",
+          "condition": "Сделка совершена в период от 1 до 6 месяцев до принятия заявления, и кредитор знал о неплатежеспособности или недостаточности имущества (презумпция знания для заинтересованных лиц)"
+        }
+      },
+      "article_61_9_limitation": {
+        "statute": "ст. 61.9 127-ФЗ",
+        "title": "Сроки исковой давности по оспариванию сделок должника",
+        "limitation_period_years": 1,
+        "type": "оспоримая сделка (п. 2 ст. 181 ГК РФ, п. 1 ст. 61.9 127-ФЗ)",
+        "start_trigger": "со дня, когда арбитражный управляющий (или конкурсный кредитор) узнал или должен был узнать о наличии оснований для оспаривания сделки, но не ранее введения соответствующей процедуры банкротства"
+      }
+    }
+  },
+  "w7_norms_source": "ограничение/оспоримость: АКТ legal 25.10 (the compliance file, VERIFIED) — ст. 202-204 ГК РФ + гл. III.1 127-ФЗ (ст. 61.1-61.3, 61.9); правка  ст. 202-213 127-ФЗ утратили силу 01.10.2015 (154-ФЗ)"
+}

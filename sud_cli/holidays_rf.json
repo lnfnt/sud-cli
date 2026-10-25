@@ -1,0 +1,62 @@
+{
+  "_note": "Production calendar for the Russian Federation, federal level only.",
+  "_source": "ст. 112 ТК РФ (fixed federal non-working holidays) + Government transfer decrees",
+  "_scope": "MVP per colleague-legal addendum 1.1.0 п.Б2. Regional holidays are NOT included.",
+  "_transfer_provenance": "Decrees were verified against the official portal scan, not transcribed from memory. Each entry records its own decree; a year without an entry keeps the CALENDAR_WARNING.",
+  "federal_holidays": {
+    "2024": ["01-01", "01-02", "01-03", "01-04", "01-05", "01-06", "01-07", "01-08",
+             "02-23", "03-08", "05-01", "05-09", "06-12", "11-04"],
+    "2025": ["01-01", "01-02", "01-03", "01-04", "01-05", "01-06", "01-07", "01-08",
+             "02-23", "03-08", "05-01", "05-09", "06-12", "11-04"],
+    "2026": ["01-01", "01-02", "01-03", "01-04", "01-05", "01-06", "01-07", "01-08",
+             "02-23", "03-08", "05-01", "05-09", "06-12", "11-04"],
+    "2027": ["01-01", "01-02", "01-03", "01-04", "01-05", "01-06", "01-07", "01-08",
+             "02-23", "03-08", "05-01", "05-09", "06-12", "11-04"]
+  },
+  "_transfer_note": "Days moved in by a Government decree (a weekday declared a day off) or out of a holiday. Both directions matter: a day moved OUT becomes an ordinary working day, and one moved IN becomes non-working.",
+  "transfers": {
+    "2026": {
+      "decree": "Постановление Правительства РФ от 24.09.2025 № 1466 «О переносе выходных дней в 2026 году»",
+      "decree_number": 1466,
+      "decree_date": "2025-09-24",
+      "published": "официальный интернет-портал правовой информации, 24.09.2025, N 0001202509240023; СЗ РФ, 29.09.2025, N 39, ст. 5738",
+      "url": "http://publication.pravo.gov.ru/document/0001202509240023",
+      "amendments_found": false,
+      "extra_days_off": ["01-09", "12-31"],
+      "extra_days_off_reason": "с субботы 3 января на пятницу 9 января; с воскресенья 4 января на четверг 31 декабря (второй абзац ч. 1 ст. 112 ТК РФ — новогодние переносы делает только Правительство)",
+      "days_restored_to_working": []
+    },
+    "2027": {
+      "decree": "Постановление Правительства РФ от 17.09.2026 № 1187 «О переносе выходных дней в 2027 году»",
+      "decree_number": 1187,
+      "decree_date": "2026-09-17",
+      "published": "официальный интернет-портал правовой информации, 18.09.2026, N 0001202609180037",
+      "url": "http://publication.pravo.gov.ru/document/0001202609180037",
+      "amendments_found": false,
+      "extra_days_off": ["02-22", "11-05", "12-31"],
+      "extra_days_off_reason": "с субботы 20 февраля на понедельник 22 февраля (выходной переносится на рабочий понедельник, поскольку 23 февраля — праздник); с субботы 2 января на пятницу 5 ноября; с воскресенья 3 января на пятницу 31 декабря. Первые два новогодних переноса делает только Правительство (абз. 2 ч. 1 ст. 112 ТК РФ), первый — из общего правила ч. 2 ст. 112.",
+      "days_restored_to_working": ["02-20"],
+      "days_restored_to_working_reason": "с субботы 20 февраля на понедельник 22 февраля. Перенос двусторонний: 20 февраля перестаёт быть выходным (иначе появляется лишний нерабочий день), 22 февраля им становится. Без этой строки февраль 2027 даёт 18 рабочих дней вместо 19 по опубликованному календарю.",
+      "verification": "Прочитан со скана официального портала (publication.pravo.gov.ru/file/pdf?eoNumber=0001202609180037), 1 страница. Дни недели в тексте постановления сверены: 02.01.2027 = суббота, 03.01.2027 = воскресенье, 20.02.2027 = суббота, 22.02.2027 = понедельник. Контрольный счёт: 247 рабочих / 118 выходных и праздничных за 2027 год — совпадает с опубликованным производственным календарём."
+    }
+  },
+  "_auto_transfer_note": "ч. 2 ст. 112 ТК РФ: a holiday landing on a weekend moves to the next working day automatically, EXCEPT the holidays named in абз. 2 and 3 of the same article (1–8 января, 23 февраля) — for those only the Government may move the day off. The automatic moves below are therefore derived from ст. 112, not from the decree.",
+  "auto_transfers_st112": {
+    "2026": [
+      {"holiday": "03-08", "weekday": "воскресенье", "moved_to": "03-09"},
+      {"holiday": "05-09", "weekday": "суббота", "moved_to": "05-11"}
+    ],
+    "2027": [
+      {"holiday": "05-01", "weekday": "суббота", "moved_to": "05-03"},
+      {"holiday": "05-09", "weekday": "воскресенье", "moved_to": "05-10"},
+      {"holiday": "06-12", "weekday": "суббота", "moved_to": "06-14"}
+    ]
+  },
+  "transfer_decrees_encoded": true,
+  "years_with_verified_transfers": [2026, 2027],
+  "verified_through": 2027,
+  "known_years": [2024, 2025, 2026, 2027],
+  "warning_template": "CALENDAR_WARNING: расчёт произведён по базовым выходным (сб/вс), ст. 112 ТК РФ и автопереносам, но перенос Правительства РФ за {year} год НЕ зашит (постановление не подтверждено). Фактические нерабочие дни могут отличаться.",
+  "no_warning_template": "Переносы Правительства РФ за {year} год учтены ({decree}). Переносы, введённые позже этой даты, не учтены.",
+  "regional_note": "Региональные нерабочие праздничные дни субъектов РФ не учитываются."
+}
