@@ -1,0 +1,36 @@
+{
+  "source": "synthetic-mos-gorsud",
+  "case_number": "02-1234/2026",
+  "court": "Synthetic Moscow District Court",
+  "judge": "Петрова А.С.",
+  "status": "Назначено",
+  "participants": {
+    "plaintiff": ["Гражданин СИНТ"],
+    "respondent": ["АО ТЕСТ"],
+    "third_parties": ["Третье лицо СИНА"]
+  },
+  "next_hearing": {
+    "date": "2026-11-02",
+    "time": "14:00",
+    "hall": "305",
+    "type": "Судебное заседание"
+  },
+  "last_event": {
+    "date": "2026-09-03",
+    "event_type": "Синтетическое определение о подготовке",
+    "document_url": "https://example.invalid/synthetic-document-2"
+  },
+  "events_timeline": [
+    {
+      "date": "2026-08-20",
+      "name": "Иск подан",
+      "published": true
+    },
+    {
+      "date": "2026-09-03",
+      "name": "Синтетическое определение о подготовке",
+      "published": false
+    }
+  ],
+  "updated_at": "2026-09-06T00:00:00Z"
+}

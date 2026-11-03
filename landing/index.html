@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>sud-cli — юридический экзоскелет в терминале</title>
+<meta name="description" content="Юридический CLI-экзоскелет: судебные дела и события, процессуальные сроки, госпошлины по НК РФ, проценты по ст. 395/317.1 ГК РФ, производственные календари, КБК. Fail-closed, детерминировано, AGPL-3.0.">
+<style>
+:root{
+  --bg:#0b0e13; --panel:#11161e; --panel2:#0e1219; --border:#212a37;
+  --text:#d6dee9; --dim:#8a97a8; --mono:#c9a6f5; --accent:#9d6ee0;
+  --ok:#3fb96b; --warn:#d9a53a; --bad:#d96060;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  background:var(--bg);color:var(--text);
+  font:15px/1.65 -apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+  background-image:linear-gradient(rgba(201,166,245,.025) 1px,transparent 1px),
+                   linear-gradient(90deg,rgba(201,166,245,.025) 1px,transparent 1px);
+  background-size:32px 32px;
+}
+.wrap{max-width:960px;margin:0 auto;padding:0 24px}
+a{color:var(--mono);text-decoration:none}
+a:hover{text-decoration:underline}
+.mono,code,pre{font-family:"SF Mono",Consolas,Menlo,"Liberation Mono",monospace}
+code{background:var(--panel);border:1px solid var(--border);border-radius:4px;padding:1px 6px;font-size:13px;color:var(--mono)}
+header{padding:64px 0 40px;border-bottom:1px solid var(--border)}
+.badges{display:flex;flex-wrap:wrap;gap:8px;margin:16px 0 20px}
+.badge{display:inline-block;padding:3px 10px;border:1px solid var(--border);border-radius:999px;
+  font-family:"SF Mono",Consolas,monospace;font-size:12px;color:var(--dim);background:var(--panel)}
+.badge.acc{color:var(--accent);border-color:#3a2a55}
+.badge.ok{color:var(--ok);border-color:#1f4630}
+h1{font-size:34px;letter-spacing:-.5px;margin-bottom:8px}
+h1 .tag{color:var(--mono);font-size:15px;font-family:"SF Mono",Consolas,monospace;font-weight:400;margin-left:10px}
+.lede{color:var(--dim);max-width:720px;font-size:16px}
+section{padding:44px 0;border-bottom:1px solid var(--border)}
+section:last-child{border-bottom:none}
+h2{font-size:20px;margin-bottom:6px;letter-spacing:-.2px}
+h2::before{content:"§ ";color:var(--accent)}
+.sub{color:var(--dim);margin-bottom:20px;max-width:720px}
+table{width:100%;border-collapse:collapse;font-size:14px;margin:12px 0}
+th,td{text-align:left;padding:9px 12px;border:1px solid var(--border);vertical-align:top}
+th{background:var(--panel);color:var(--dim);font-weight:600;font-family:"SF Mono",Consolas,monospace;font-size:12px;text-transform:uppercase;letter-spacing:.6px}
+tr:nth-child(even) td{background:rgba(255,255,255,.015)}
+pre{background:var(--panel2);border:1px solid var(--border);border-radius:8px;padding:18px;
+  overflow-x:auto;font-size:13px;line-height:1.7;margin:14px 0;color:#c8d3e0}
+pre .c{color:#5c6b7c}
+pre .k{color:var(--mono)}
+pre .s{color:#8fd694}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(270px,1fr));gap:14px;margin:16px 0}
+.card{background:var(--panel);border:1px solid var(--border);border-radius:8px;padding:16px 18px}
+.card h3{font-size:14px;margin-bottom:6px;color:var(--text)}
+.card h3::before{content:"▸ ";color:var(--accent)}
+.card p{font-size:13px;color:var(--dim)}
+footer{padding:36px 0 56px;color:var(--dim);font-size:13px}
+.env td:first-child{white-space:nowrap;color:var(--mono)}
+@media (max-width:640px){h1{font-size:26px}}
+</style>
+</head>
+<body>
+<header>
+<div class="wrap">
+  <h1>sud-cli<span class="tag">// юридический экзоскелет в терминале</span></h1>
+  <div class="badges">
+    <span class="badge acc">AGPL-3.0</span>
+    <span class="badge">v2.9.0</span>
+    <span class="badge ok">fail-closed</span>
+    <span class="badge">детерминированный вывод</span>
+    <span class="badge">изолированное хранилище</span>
+    <span class="badge">Python</span>
+  </div>
+  <p class="lede">CLI-экзоскелет для юридической работы: судебные дела и события, процессуальные сроки,
+  госпошлины по НК РФ, проценты по ст. 395 и 317.1 ГК РФ, производственные календари с региональными
+  праздниками, реквизиты платежей (КБК). Каждый расчёт исполняется строго по утверждённой спецификации
+  правил: вызов вне спецификации отклоняется с явным статусом вместо тихого нуля на выходе.</p>
+</div>
+</header>
+
+<section><div class="wrap">
+  <h2>Быстрый старт</h2>
+  <pre><span class="c"># диагностика окружения и хранилища</span>
+python -m pip install -e .
+<span class="k">sud-cli doctor</span>
+
+<span class="c"># дела и события: импорт, карточка, поиск</span>
+<span class="k">sud-cli court import</span> fixtures/cases.json
+<span class="k">sud-cli court case</span> CASE-0001
+<span class="k">sud-cli court search</span> встречное требование --since 2026-01-01 --until 2026-12-31 --limit 10
+
+<span class="c"># нормативные документы: поиск и сравнение редакций</span>
+<span class="k">sud-cli npa search</span> договор
+<span class="k">sud-cli npa compare</span> --id NPA-0001 --edition1 v1 --edition2 v2
+
+<span class="c"># официальные публикации: только метаданные</span>
+<span class="k">sud-cli law search</span> <span class="s">"о банкротстве"</span>
+<span class="k">sud-cli law search</span> --number <span class="s">"12345"</span></pre>
+</div></section>
+
+<section><div class="wrap">
+  <h2>Дела и документы</h2>
+  <div class="grid">
+    <div class="card"><h3>Версионированная схема</h3><p><code>cases</code>/<code>events</code> — нормализованная карточка дела и детерминированно упорядоченная лента событий: заседания, определения, итоги.</p></div>
+    <div class="card"><h3>Локальный поиск</h3><p>Свободный полнотекстовый поиск по импортированным делам с датовыми границами и лимитом результата. Тела документов не возвращаются — только метаданные и события.</p></div>
+    <div class="card"><h3>Редакции НПА</h3><p><code>npa compare</code> — сравнение версий документа по фиксациям; <code>npa search</code> — поиск по реестру. Без живых источников.</p></div>
+    <div class="card"><h3>Официальные публикации</h3><p><code>law search</code> — один явный HTTPS-запрос к документированному endpoint официального опубликования, возвращает только метаданные.</p></div>
+  </div>
+</div></section>
+
+<section><div class="wrap">
+  <h2>Сроки и календарь</h2>
+  <p class="sub">Сроки — самая дорогая ошибка в процессе. Расчёт ведётся до секунды местного
+  времени суда, с учётом переносов выходных и региональных праздников.</p>
+  <table>
+    <tr><th>Возможность</th><th>Детали</th></tr>
+    <tr><td>Региональные праздники</td><td><code>--region</code> (например, <code>16</code> — Татарстан, <code>02</code> — Башкортостан): региональные нормы накладываются на федеральный производственный календарь.</td></tr>
+    <tr><td>Часовой пояс суда</td><td><code>--tz</code> (по умолчанию <code>Europe/Moscow</code>): сроки до 23:59:59 местного времени суда (ч. 6 ст. 114 АПК РФ).</td></tr>
+    <tr><td>Проверка календаря</td><td><code>sud-cli calendar check</code> — покрытие переносов указами и годы действия календаря.</td></tr>
+    <tr><td>Финансовый контур</td><td>Проценты по ст. 395 / 317.1 ГК РФ через меняющиеся ключевые ставки ЦБ, с учётом частичных платежей и судебных расходов.</td></tr>
+  </table>
+  <pre><span class="k">sud-cli interest</span> --principal 1500000 --start 2025-06-01 --end 2026-10-01 \
+  --payments <span class="s">"2025-12-15:500000,2026-03-01:300000"</span> --calc-fee</pre>
+</div></section>
+
+<section><div class="wrap">
+  <h2>Госпошлины и платежи</h2>
+  <table>
+    <tr><th>Команда</th><th>Что делает</th></tr>
+    <tr><td><code>sud-cli fees</code></td><td>Госпошлина по утверждённой спецификации. Банкротные пошлины 259-ФЗ: 100 000 ₽ (юрлицо), 10 000 ₽ (физлицо), прогрессивные вилки требований кредиторов (ст. 333.21 п. 1 пп. 5 НК РФ). Вызовы вне спецификации — <code>UNSUPPORTED</code>, не догадка.</td></tr>
+    <tr><td><code>sud-cli payment</code></td><td>Реквизиты платежа: КБК и назначение платежа для арбитражных судов, судов общей юрисдикции и КАС.</td></tr>
+    <tr><td><code>sud-cli deferral</code></td><td>Ходатайство об отсрочке/рассрочке (ст. 333.41 НК РФ, ст. 102 АПК РФ) с обязательным чек-листом банковских и налоговых справок.</td></tr>
+  </table>
+  <pre><span class="k">sud-cli fees</span> --jurisdiction arbitration --kind bankruptcy_petition --entity individual
+<span class="k">sud-cli payment</span> --jurisdiction arbitration --court <span class="s">"АС Московского округа"</span> \
+  --defendant <span class="s">"ООО Ромашка"</span> --amount 250000</pre>
+</div></section>
+
+<section><div class="wrap">
+  <h2>Гарантии контура</h2>
+  <div class="grid">
+    <div class="card"><h3>Fail-closed</h3><p>Расчёты исполняются строго по утверждённой спецификации правил. Вне спецификации — явный <code>UNSUPPORTED</code>/<code>MISSING</code>, а не пустой успех.</p></div>
+    <div class="card"><h3>Изолированное хранилище</h3><p>Всё локальное состояние — в каталоге, принадлежащем sud-cli (<code>~/.local/share/sud-cli</code>; переопределяется <code>SUD_CLI_STATE_DIR</code> или <code>--state-dir</code>).</p></div>
+    <div class="card"><h3>Честная деградация</h3><p>Ошибки — ненулевой код с явным сообщением. Никаких «пустых успехов»: недоступный источник помечен недоступным, не подменяется молчанием.</p></div>
+    <div class="card"><h3>Синтетические фикстуры</h3><p>Импорт и поиск проверяются на синтетических данных: ни реальных номеров дел, ни учётных данных, ни подлинных документов в тестах.</p></div>
+    <div class="card"><h3>Без живого доступа к порталам</h3><p>Картотеки и порталы судов напрямую не опрашиваются: работа — с импортированными материалами и ограниченными метаданными официального опубликования.</p></div>
+    <div class="card"><h3>Эргономика</h3><p><code>--json</code> принимается в любой позиции любой подкоманды — машинный разбор не зависит от порядка аргументов.</p></div>
+  </div>
+</div></section>
+
+<section><div class="wrap">
+  <h2>Конфигурация</h2>
+  <table class="env">
+    <tr><th>Переменная / флаг</th><th>Назначение</th></tr>
+    <tr><td><code>SUD_CLI_STATE_DIR</code></td><td>Каталог состояния; по умолчанию <code>~/.local/share/sud-cli</code>.</td></tr>
+    <tr><td><code>--state-dir</code></td><td>То же на уровне отдельного вызова.</td></tr>
+    <tr><td><code>--json</code></td><td>Машиночитаемый вывод; допустим в любой позиции.</td></tr>
+    <tr><td><code>--tz</code>, <code>--region</code></td><td>Часовой пояс суда и региональный календарь для расчёта сроков.</td></tr>
+  </table>
+  <p class="sub">Область применения: российская юрисдикция. Расчёты носят вспомогательный характер и не заменяют проверку юристом.</p>
+</div></section>
+
+<footer><div class="wrap">
+  <p>AGPL-3.0-or-later · Автор и правообладатель: <a href="mailto:lnfnt@proton.me">lnfnt</a> · Исходники: <a href="https://github.com/lnfnt/sud-cli">github.com/lnfnt/sud-cli</a></p>
+</div></footer>
+</body>
+</html>
