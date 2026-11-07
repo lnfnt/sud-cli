@@ -1,0 +1,31 @@
+{
+  "source": "synthetic-kad",
+  "case_number": "A40-SYNTH-2026",
+  "court": "Synthetic Arbitration Court",
+  "judge": "Иванов И.И.",
+  "status": "В производстве",
+  "participants": {
+    "plaintiff": ["ООО Синтетика"],
+    "respondent": ["ООО Тест"],
+    "third_parties": []
+  },
+  "next_hearing": {
+    "date": "2026-10-15",
+    "time": "11:30",
+    "hall": "4012",
+    "type": "Судебное заседание"
+  },
+  "last_event": {
+    "date": "2026-09-01",
+    "event_type": "Синтетическое определение",
+    "document_url": "https://example.invalid/synthetic-document"
+  },
+  "events_timeline": [
+    {
+      "date": "2026-09-01",
+      "name": "Синтетическое определение",
+      "published": true
+    }
+  ],
+  "updated_at": "2026-09-06T00:00:00Z"
+}
